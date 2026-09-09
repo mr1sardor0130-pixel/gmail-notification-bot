@@ -10,6 +10,14 @@ type TelegramUpdate = {
   }
 }
 
+export async function GET() {
+  return NextResponse.json({
+    status: 200,
+    telegram_bot: process.env.TELEGRAM_BOT_TOKEN ? "ok" : "error",
+    webhook: "ready",
+  })
+}
+
 export async function POST(request: Request) {
   const update = (await request.json()) as TelegramUpdate
   const token = process.env.TELEGRAM_BOT_TOKEN
